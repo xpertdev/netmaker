@@ -49,7 +49,12 @@ ExecStart=/etc/netmaker/netmaker
 WantedBy=multi-user.target
 EOL
 systemctl daemon-reload
+
+sleep 5
 systemctl start netmaker.service
+
+sleep 5
+systemctl restart netmaker.service
 
 
 docker run -d --name netmaker-ui -p 80:80 -e BACKEND_URL="http://$SERVER_DOMAIN:8081" gravitl/netmaker-ui:v0.2
