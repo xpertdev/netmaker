@@ -6,6 +6,8 @@ set -e
 
 docker volume create mongovol && docker run -d --name mongodb -v mongovol:/data/db --network host -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=mongopass mongo --bind_ip 0.0.0.0 
 
+sleep 10
+
 mkdir -p /etc/netmaker/config/environments
 wget -O /etc/netmaker/netmaker https://github.com/gravitl/netmaker/releases/download/latest/netmaker
 chmod +x /etc/netmaker/netmaker
@@ -40,7 +42,7 @@ After=network.target
 Type=simple
 Restart=on-failure
 
-WorkingDirectory=/etc/netmaker
+WorkingDirectory=/etc/netmaker/
 ExecStart=/etc/netmaker/netmaker
 
 [Install]
